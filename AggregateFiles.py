@@ -1,56 +1,43 @@
-import shutil
-import os
 from pathlib import Path
 
-def copy_files_from_subfolders():
-    # Get the path of the directory where the script is located
-    current_dir = Path(__file__).resolve().parent
-    
-    # Set the source directory to the script's location
-    src_dir = current_dir
-    
-    # Define the destination directory inside the source directory
-    dest_dir = src_dir / 'FilesAggregate'
-    
-    # Create the destination directory if it doesn't exist
-    if not dest_dir.exists():
-        dest_dir.mkdir()
-
+# Defines a function to print the directory structure into a file
+def print_directory_structure_to_file(root_dir, file_handle, prefix=''):
     # Sets of directories and file extensions to exclude/include
-    excluded_dirs = {'.git', '.vs', 'bin', 'obj', 'Debug', 'Release', 'packages'}
+    excluded_dirs = {'.git', '.vs', 'bin', 'obj', 'Debug', 'Release', 'packages', 'FilesAggregate'}
     included_file_extensions = {'.sln', '.csproj', '.vbproj', '.cs', '.html', '.cshtml', '.css', '.js', '.mrt', '.json'}
 
-    # Walk through the source directory and its subfolders
-    for root, dirs, files in os.walk(src_dir):
-        # Skip directories that are in the excluded list
-        dirs[:] = [d for d in dirs if d not in excluded_dirs]
-        
-        for file in files:
-            # Get the full path of the file
-            file_path = Path(root) / file
-            
-            # Ignore the script itself and the destination folder
-            if file_path == Path(__file__) or dest_dir in file_path.parents:
-                continue
+    # Converts root_dir to a Path object for easy path manipulation
+    root_path = Path(root_dir)
+    # Skip the directory if it's in the excluded list
+    if root_path.name in excluded_dirs:
+        return
 
-            # Check if the file has an allowed extension
-            if file_path.suffix in included_file_extensions:
-                # Create the destination file path
-                dest_file_path = dest_dir / file
-                
-                # Check if a file with the same name already exists in the destination
-                if dest_file_path.exists():
-                    # Rename the file by adding a number suffix
-                    base = file_path.stem
-                    extension = file_path.suffix
-                    i = 1
-                    while dest_file_path.exists():
-                        dest_file_path = dest_dir / f"{base}_{i}{extension}"
-                        i += 1
-                
-                # Copy the file to the destination folder
-                shutil.copy2(file_path, dest_file_path)
-                print(f"Copied: {file_path} -> {dest_file_path}")
+    # Writes the directory name to the file
+    file_handle.write(f"{prefix}{root_path.name}/\n")
+    # Increases the prefix for nested items
+    prefix += '    '
 
-# Run the function
-copy_files_from_subfolders()
+    # Iterates through each item in the directory
+    for entry in root_path.iterdir():
+        if entry.is_dir():
+            # Recursively prints the structure of subdirectories
+            print_directory_structure_to_file(entry, file_handle, prefix)
+        elif entry.suffix in included_file_extensions:
+            # Writes the file name if it has a relevant extension
+            file_handle.write(f"{prefix}{entry.name}\n")
+
+# Gets the location of the current script and resolves it to an absolute path
+script_location = Path(__file__).resolve().parent
+
+# Sets the project folder path to the script location
+project_folder_path = script_location
+# Defines the output file path within the same directory as the script
+output_file_path = script_location / 'project_structure.txt'
+
+# Attempts to write the directory structure to the specified file
+try:
+    with open(output_file_path, 'w') as output_file:
+        print_directory_structure_to_file(project_folder_path, output_file)
+    print(f"The project structure has been written to '{output_file_path}'.")
+except Exception as e:
+    print(f"Failed to write the file: {e}")
