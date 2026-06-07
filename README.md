@@ -47,10 +47,21 @@ excluded_dirs = [".git", ".vs", "bin", "obj", "Debug", "Release", "packages", "M
 included_file_extensions = [".sln", ".csproj", ".cs", ".html", ".cshtml", ".css", ".js", ".json"]
 ```
 
+## 💖 Support the Project
+
+This project is free and open source. If you find it useful, consider supporting its development — every contribution helps and is genuinely appreciated! ❤️
+
+<p align="center">
+  <a href="https://github.com/sponsors/ChromuSx"><img src="https://img.shields.io/badge/Sponsor-GitHub-EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white" alt="GitHub Sponsors"></a>
+  <a href="https://ko-fi.com/chromus"><img src="https://img.shields.io/badge/Support-Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Ko-fi"></a>
+  <a href="https://buymeacoffee.com/chromus"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me a Coffee"></a>
+  <a href="https://www.paypal.com/paypalme/giovanniguarino1999"><img src="https://img.shields.io/badge/Donate-PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white" alt="PayPal"></a>
+</p>
+
 ## 📄 License
 
 MIT — see [LICENSE](LICENSE).
 
 <div align="center">
-  <strong>Made with ❤️ by <a href="https://github.com/ChromuSx">Giovanni Guarino</a></strong>
+  <sub>Made with ❤️ by <a href="https://github.com/ChromuSx">Giovanni Guarino</a></sub>
 </div>
