@@ -1,42 +1,56 @@
-# 📂 AggregateFiles Script
+# 📂 AggregateFiles
 
-## Description
-This Python script, called **AggregateFiles**, allows you to copy all files with specific extensions from a source folder and its subfolders into a single destination folder named `FilesAggregate`. This script is particularly useful for those working on projects with many files scattered across different directories, and who want to aggregate relevant files in one place for easier access or analysis. 📁
+<div align="center">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/license-MIT-green.svg?style=for-the-badge" alt="MIT License">
+  <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue?style=for-the-badge" alt="Platform">
+</div>
 
-### Features ✨
-- **Included File Extensions**: The script only copies files with specific extensions, including `.sln`, `.csproj`, `.vbproj`, `.cs`, `.html`, `.cshtml`, `.css`, `.js`, `.mrt`, `.json`.
-- **Excluded Directories**: Folders such as `.git`, `.vs`, `bin`, `obj`, `Debug`, `Release`, `packages`, `Migrations`, and `SmartAttachments` are excluded from the search, ensuring that only important files are considered.
-- **Name Conflict Handling**: If a file with the same name already exists in the destination folder, the new file is renamed by adding a numeric suffix to avoid conflicts.
+<p align="center">
+  <a href="https://github.com/sponsors/ChromuSx"><img src="https://img.shields.io/badge/Sponsor-GitHub-EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white" alt="GitHub Sponsors"></a>
+  <a href="https://ko-fi.com/chromus"><img src="https://img.shields.io/badge/Support-Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Ko-fi"></a>
+  <a href="https://buymeacoffee.com/chromus"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me a Coffee"></a>
+  <a href="https://www.paypal.com/paypalme/giovanniguarino1999"><img src="https://img.shields.io/badge/Donate-PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white" alt="PayPal"></a>
+</p>
 
-## How It Works 🛠️
-The script performs the following steps:
-1. **Creates the destination folder** (`FilesAggregate`) in the same directory as the script if it doesn't already exist.
-2. **Scans the source folder and subfolders** to find all files with the specified extensions, ignoring excluded folders.
-3. **Copies the files to the destination folder**, handling name conflicts by adding a numeric suffix.
+<p align="center">
+  <strong>Python script that aggregates all files with specific extensions from a directory tree into a single folder — perfect for feeding an entire project to an AI or code analysis tool.</strong>
+</p>
 
-## Requirements 📋
-- **Python 3.x**
-- Standard Python modules: `os`, `shutil`, `pathlib`
+## ✨ Features
 
-## Usage 🚀
-To run the script, simply save it to a Python file (e.g., `AggregateFiles.py`) and execute it:
+- **Targeted extensions**: copies only `.sln`, `.csproj`, `.cs`, `.html`, `.cshtml`, `.css`, `.js`, `.json` and more
+- **Smart exclusions**: skips `.git`, `bin`, `obj`, `node_modules`, `Migrations` and other noise folders automatically
+- **Conflict handling**: renames duplicates with a numeric suffix — no overwrites
+- **Zero dependencies**: uses only Python standard library (`os`, `shutil`, `pathlib`)
 
-```sh
+## 📋 Requirements
+
+- Python 3.x
+
+## 🚀 Usage
+
+Place the script in the root of the directory you want to scan, then run:
+
+```bash
 python AggregateFiles.py
 ```
 
-Make sure the script is located in the directory you want to analyze. The script will create a folder named `FilesAggregate` in the same path, where the selected files will be copied.
+A `FilesAggregate/` folder will be created in the same location with all matching files collected.
 
-## Customization 🔧
-- **Exclude Directories**: You can modify the `excluded_dirs` list to add or remove directories that you don't want to include in the scan.
-- **Included File Extensions**: You can modify the `included_file_extensions` list to add or remove file types to be considered.
+## ⚙️ Customization
 
-## Example Output 🖨️
-During execution, the script will print a message for each copied file, for example:
-```
-Copied: /path/to/source/file.cs -> /path/to/source/FilesAggregate/file.cs
-Copied: /path/to/source/file.html -> /path/to/source/FilesAggregate/file_1.html
+Edit these two lists at the top of the script:
+
+```python
+excluded_dirs = [".git", ".vs", "bin", "obj", "Debug", "Release", "packages", "Migrations"]
+included_file_extensions = [".sln", ".csproj", ".cs", ".html", ".cshtml", ".css", ".js", ".json"]
 ```
 
-## License 📄
-You are free to use and modify this script as needed.
+## 📄 License
+
+MIT — see [LICENSE](LICENSE).
+
+<div align="center">
+  <strong>Made with ❤️ by <a href="https://github.com/ChromuSx">Giovanni Guarino</a></strong>
+</div>
